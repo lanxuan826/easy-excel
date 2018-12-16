@@ -31,10 +31,10 @@ public class TModel {
     @Export
     private  boolean bs;
 
-    @Export(colName = "creation_date",cellStyle="Date",cellFormat= DateUtil.DATE_TIME_FORMAT_DEFAULT,cellAlign= ExcelConstant.HSSFCELLSTYLE_ALIGN_RIGHT)
+    @Export(colName = "creation_date",width = 5000,cellStyle="Date",cellFormat= DateUtil.DATE_TIME_FORMAT_DEFAULT,cellAlign= ExcelConstant.HSSFCELLSTYLE_ALIGN_RIGHT)
     private  String creation_date;
 
-    @Export(colName = "creDate",cellStyle = "Date",cellFormat = DateUtil.DATE_TIME_FORMAT_DEFAULT,cellAlign = ExcelConstant.HSSFCELLSTYLE_ALIGN_CENTER)
+    @Export(colName = "creDate",width = 5000,cellStyle = "Date",cellFormat = DateUtil.DATE_TIME_FORMAT_DEFAULT,cellAlign = ExcelConstant.HSSFCELLSTYLE_ALIGN_CENTER)
     private Date creDate;
 
     @Export(cellStyle="Double" ,cellFormat="#,##0.00")

@@ -13,6 +13,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -198,6 +199,7 @@ public class PoiUtil {
             String title = getTitle(clazz); // excelTitle
             String fileName = obj == null ? "" : obj.length <= 0 ? "" : obj[0] + "";
             int bRow = writeTitle(sheet, fileName, title, obj); // 数据列表开始行
+
             Field[] fields = clazz.getDeclaredFields();
             int colNum = 0; //列序号
             for (Field field :fields) {
@@ -227,20 +229,18 @@ public class PoiUtil {
                         Object robj = method.invoke(t);
                         if (robj == null) {
                             robj = exp.value();
-                        }
-
-                        cell.setCellStyle(cellStyle);
+                        }cell.setCellStyle(cellStyle);
                         if ("Date".equals(expCellStyle)) {
                             cell.setCellValue(DateUtil.objToDate(robj, cellFormat));
                         } else if ("Integer".equals(expCellStyle)) {
                             cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
-                            if ("".equals(robj)) {
+                            if (StringUtils.isEmpty(robj)) {
                                 robj = "0";
                             }
                             cell.setCellValue(Integer.parseInt(robj.toString()));
                         } else if ("Double".equals(expCellStyle)) {
                             cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
-                            if ("".equals(robj)) {
+                            if (StringUtils.isEmpty(robj)) {
                                 robj = "0";
                             }
                             cell.setCellValue(Double.parseDouble(robj.toString()));
@@ -279,9 +279,7 @@ public class PoiUtil {
         for (int i = 0; i < 10; i++) {
 
             TModel a = new TModel();
-
             a.setType("类型_" + (i + 1));
-
             a.setName("名字_" + (i + 1));
             a.setCreation_date("2015-07-09 12:22:22");
             a.setIntValue("398");
